@@ -5,8 +5,8 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon --watch server.js",
-    "start": "nodemon server.js",
+    "dev": "nodemon --watch server.js --watch config --watch controllers --watch middleware --watch models --watch routes --watch utils --ext js --ignore uploads/",
+    "start": "nodemon --watch server.js --watch config --watch controllers --watch middleware --watch models --watch routes --watch utils --ext js --ignore uploads/",
     "seed": "node seed.js",
     "check": "node --check server.js"
   },

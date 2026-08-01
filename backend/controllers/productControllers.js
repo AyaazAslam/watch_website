@@ -186,8 +186,11 @@ export async function createProduct(req, res, next) {
       image2,
       handle: handle || slugify(title),
       inStock: parseBool(inStock, true),
-      badge,
-      badgeType: badgeType || undefined,
+      badge: badge || undefined,
+      badgeType:
+        badgeType && ['sale', 'new', 'soldout'].includes(badgeType)
+          ? badgeType
+          : undefined,
       variants: parseJsonField(variants, []),
       hasColors: parseBool(hasColors, false),
     });
@@ -227,7 +230,11 @@ export async function updateProduct(req, res, next) {
     }
     if (req.body.badge !== undefined) product.badge = req.body.badge;
     if (req.body.badgeType !== undefined) {
-      product.badgeType = req.body.badgeType || undefined;
+      product.badgeType =
+        req.body.badgeType &&
+        ['sale', 'new', 'soldout'].includes(req.body.badgeType)
+          ? req.body.badgeType
+          : undefined;
     }
     if (req.body.discount !== undefined) {
       product.discount = req.body.discount ? Number(req.body.discount) : undefined;

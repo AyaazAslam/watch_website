@@ -362,6 +362,11 @@ const products = [
   ...bestSellerProducts,
 ].map((product) => ({
   ...product,
+  // Seed source values were in paisa — store as PKR rupees
+  price: Math.round(product.price / 100),
+  comparePrice: product.comparePrice
+    ? Math.round(product.comparePrice / 100)
+    : undefined,
   gender: FEMALE_HANDLES.has(product.handle) ? 'female' : 'male',
 }));
 
@@ -370,7 +375,7 @@ const sampleOrders = [
     orderId: 'ORD-1042',
     customer: 'Sara Ahmed',
     product: 'Skmei 1848 Men’s Watch',
-    amount: 629900,
+    amount: 6299,
     status: 'confirmed',
     channel: 'whatsapp',
     date: new Date('2026-07-30'),
@@ -379,7 +384,7 @@ const sampleOrders = [
     orderId: 'ORD-1041',
     customer: 'Bilal Khan',
     product: 'Skmei 1894 Men’s Watch',
-    amount: 599900,
+    amount: 5999,
     status: 'shipped',
     channel: 'whatsapp',
     date: new Date('2026-07-29'),
@@ -388,7 +393,7 @@ const sampleOrders = [
     orderId: 'ORD-1040',
     customer: 'Omar Siddiqui',
     product: 'Skmei 1628 Men’s Watch',
-    amount: 499900,
+    amount: 4999,
     status: 'pending',
     channel: 'walk-in',
     date: new Date('2026-07-28'),
