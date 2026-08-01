@@ -42,8 +42,14 @@ function ProductPage() {
         await addProduct(product).unwrap();
         notify.success('Product added successfully');
       }
-    } catch (error) {
-      notify.error(typeof error === 'string' ? error : 'Failed to save product');
+    } catch (error: unknown) {
+      const message =
+        typeof error === 'string'
+          ? error
+          : error instanceof Error
+            ? error.message
+            : 'Failed to save product';
+      notify.error(message);
     }
   };
 

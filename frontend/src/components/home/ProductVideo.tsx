@@ -25,7 +25,7 @@ const DEFAULT_VIDEOS: VideoItem[] = [
     posterImage:
       'https://www.rohishwatches.com/cdn/shop/files/preview_images/1f249d0b9fce462d892081d92a8d7245.thumbnail.0000000000_1500x.jpg?v=1777125373',
     productName: 'Rolex DateJust',
-    price: 'Rs. 379,900',
+    price: 'Rs. 3,799',
   },
   {
     id: 'video-2',
@@ -34,7 +34,7 @@ const DEFAULT_VIDEOS: VideoItem[] = [
     posterImage:
       'https://www.rohishwatches.com/cdn/shop/files/preview_images/51e1b696082f47c88024116621db4067.thumbnail.0000000000_1500x.jpg?v=1777125369',
     productName: 'Omega MoonSwatch',
-    price: 'Rs. 440,000',
+    price: 'Rs. 4,400',
   },
   {
     id: 'video-3',
@@ -43,7 +43,7 @@ const DEFAULT_VIDEOS: VideoItem[] = [
     posterImage:
       'https://www.rohishwatches.com/cdn/shop/files/preview_images/6e2db2d682a94fedb4dd2af8baf8e4ca.thumbnail.0000000000_1500x.jpg?v=1777125366',
     productName: 'Tissot PRX',
-    price: 'Rs. 320,000',
+    price: 'Rs. 3,200',
   },
   {
     id: 'video-4',
@@ -52,7 +52,7 @@ const DEFAULT_VIDEOS: VideoItem[] = [
     posterImage:
       'https://www.rohishwatches.com/cdn/shop/files/preview_images/dab7c22c2d834434a1ba19410b646fd2.thumbnail.0000000000_1500x.jpg?v=1777125370',
     productName: 'Patek Philippe',
-    price: 'Rs. 310,000',
+    price: 'Rs. 3,100',
   },
   {
     id: 'video-5',

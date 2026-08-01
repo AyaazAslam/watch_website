@@ -3,12 +3,14 @@ import CollectionHero from '../components/collection/CollectionHero';
 import CollectionFilters from '../components/collection/CollectionFilters';
 import CollectionToolbar from '../components/collection/CollectionToolbar';
 import CollectionGrid from '../components/collection/CollectionGrid';
+import ProductsLoader from '../components/common/ProductsLoader';
 import { useCollectionFilters } from '../hooks/useCollectionFilters';
 import { useProducts } from '../hooks/useProducts';
 
 function Collection() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const { products } = useProducts();
+  const { products, loading, status } = useProducts();
+  const showLoader = loading || (status === 'idle' && products.length === 0);
   const {
     filters,
     filteredProducts,
@@ -61,10 +63,14 @@ function Collection() {
               activeFilterCount={activeFilterCount}
             />
 
-            <CollectionGrid
-              products={filteredProducts}
-              onClearFilters={resetFilters}
-            />
+            {showLoader ? (
+              <ProductsLoader />
+            ) : (
+              <CollectionGrid
+                products={filteredProducts}
+                onClearFilters={resetFilters}
+              />
+            )}
           </section>
         </div>
       </div>

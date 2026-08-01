@@ -134,7 +134,7 @@ function FilterFields({
               type="range"
               min={priceBounds.min}
               max={priceBounds.max}
-              step={10000}
+              step={100}
               value={Math.min(
                 Math.max(filters.minPrice, priceBounds.min),
                 priceBounds.max,
@@ -152,7 +152,7 @@ function FilterFields({
               type="range"
               min={priceBounds.min}
               max={priceBounds.max}
-              step={10000}
+              step={100}
               value={Math.min(
                 Math.max(filters.maxPrice, priceBounds.min),
                 priceBounds.max,

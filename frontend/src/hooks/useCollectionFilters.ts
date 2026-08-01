@@ -29,7 +29,7 @@ export function getPriceBounds(products: CatalogProduct[]): PriceBounds {
   const prices = products.map((p) => p.price);
   const min = Math.min(...prices);
   const max = Math.max(...prices);
-  return min === max ? { min: Math.max(0, min - 10000), max: max + 10000 } : { min, max };
+  return min === max ? { min: Math.max(0, min - 100), max: max + 100 } : { min, max };
 }
 
 function sortProducts(products: CatalogProduct[], sort: SortOption): CatalogProduct[] {

@@ -12,7 +12,7 @@ export interface ProductVariant {
 
 export type ProductGender = 'male' | 'female' | 'unisex';
 
-/** Storefront + admin catalog product (prices in paisa: 379900 → Rs.3,799) */
+/** Storefront + admin catalog product (prices in PKR: 3799 → Rs.3,799) */
 export interface CatalogProduct {
   id: string;
   handle: string;

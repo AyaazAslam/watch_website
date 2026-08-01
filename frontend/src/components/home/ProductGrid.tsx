@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import SectionHeading from '../common/SectionHeading';
+import ProductsLoader from '../common/ProductsLoader';
 import ProductCard from '../product/ProductCard';
 import { useProducts } from '../../hooks/useProducts';
 import type { CatalogProduct } from '../../types';
@@ -36,14 +37,16 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
   subtitle = 'Featured picks & best sellers',
   collectionUrl = '/collection',
 }) => {
-  const { products: storeProducts } = useProducts();
+  const { products: storeProducts, loading, status } = useProducts();
   const allProducts = productsProp ?? storeProducts;
   const [tab, setTab] = useState<TabKey>('featured');
   const products = filterByTab(allProducts, tab);
+  const showLoader =
+    !productsProp && (loading || (status === 'idle' && allProducts.length === 0));
 
   return (
     <section
-      className="w-full px-4 py-10 md:py-16 bg-white"
+      className="w-full px-4 py-12 bg-white"
       style={{ marginBottom: '60px' }}
       id="collection"
     >
@@ -70,13 +73,17 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
           })}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </div>
+        {showLoader ? (
+          <ProductsLoader />
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
+            {products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
 
-        {collectionUrl && (
+        {collectionUrl && !showLoader && (
           <div className="mt-12 text-center">
             <Link
               to={collectionUrl}

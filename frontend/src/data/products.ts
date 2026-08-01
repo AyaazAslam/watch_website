@@ -15,8 +15,8 @@ export const BRANDS = [
 
 export type BrandName = (typeof BRANDS)[number];
 
-/** Prices stored in paisa (divide by 100 for display). */
-export const CATALOG_PRODUCTS: CatalogProduct[] = [
+/** Static catalog fallback — source values historically in paisa, normalized to PKR below. */
+const RAW_CATALOG_PRODUCTS: CatalogProduct[] = [
   {
     id: '10163421446434',
     handle: 'rolex-datejust-line-classic-style-watch-for-men',
@@ -135,6 +135,16 @@ export const CATALOG_PRODUCTS: CatalogProduct[] = [
   },
 ];
 
+export const CATALOG_PRODUCTS: CatalogProduct[] = RAW_CATALOG_PRODUCTS.map(
+  (product) => ({
+    ...product,
+    price: Math.round(product.price / 100),
+    comparePrice: product.comparePrice
+      ? Math.round(product.comparePrice / 100)
+      : undefined,
+  }),
+);
+
 export const PRICE_BOUNDS = (() => {
   const prices = CATALOG_PRODUCTS.map((p) => p.price);
   return {
@@ -152,8 +162,8 @@ export function slugToBrand(slug: string): string | undefined {
   return BRANDS.find((b) => brandToSlug(b) === normalized);
 }
 
-export function formatPkr(priceInPaisa: number): string {
-  return `Rs.${(priceInPaisa / 100).toLocaleString('en-PK', {
+export function formatPkr(priceInPkr: number): string {
+  return `Rs.${Number(priceInPkr || 0).toLocaleString('en-PK', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   })}`;

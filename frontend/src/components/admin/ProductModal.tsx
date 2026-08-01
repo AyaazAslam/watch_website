@@ -18,13 +18,8 @@ interface ProductModalProps {
   productToEdit?: CatalogProduct | null;
 }
 
-/** Form uses rupees; store uses paisa */
-function toRupees(paisa: number) {
-  return (paisa / 100).toString();
-}
-
-function toPaisa(rupees: string) {
-  return Math.round(parseFloat(rupees || '0') * 100);
+function toPriceNumber(rupees: string) {
+  return Math.round(parseFloat(rupees || '0'));
 }
 
 export default function ProductModal({
@@ -54,9 +49,9 @@ export default function ProductModal({
         title: productToEdit.title,
         brand: productToEdit.brand,
         gender: productToEdit.gender || 'male',
-        price: toRupees(productToEdit.price),
+        price: String(productToEdit.price ?? ''),
         comparePrice: productToEdit.comparePrice
-          ? toRupees(productToEdit.comparePrice)
+          ? String(productToEdit.comparePrice)
           : '',
         image: productToEdit.image,
         image2: productToEdit.image2 || '',
@@ -104,8 +99,10 @@ export default function ProductModal({
       return;
     }
 
-    const compare = formData.comparePrice ? toPaisa(formData.comparePrice) : undefined;
-    const price = toPaisa(formData.price);
+    const compare = formData.comparePrice
+      ? toPriceNumber(formData.comparePrice)
+      : undefined;
+    const price = toPriceNumber(formData.price);
     const onSale = Boolean(compare && compare > price);
 
     const payload: ProductFormPayload = {
